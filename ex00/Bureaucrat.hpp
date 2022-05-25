@@ -6,7 +6,7 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 17:07:03 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/25 08:04:49 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/25 21:22:32 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define MIN_GRADE 150
 
 # include <iostream>
-# include <string>
 
 class Bureaucrat
 {
@@ -28,8 +27,6 @@ public:
 
 	const Bureaucrat& operator  =  (const Bureaucrat &other);
 	Bureaucrat(const Bureaucrat &other);
-	// std::string GradeTooHighException ();
-	// std::string GradeTooLowException ();
 
 	Bureaucrat& operator ++ ();
 	Bureaucrat operator ++ (int);
@@ -38,6 +35,19 @@ public:
 
 	std::string getName() const;
 	int getGrade() const;
+
+	void increaseGrade();
+	void decreaseGrade();
+
+	class GradeTooHighException : public std::exception
+	{
+		virtual const char * what() const throw ();
+	};
+
+	class GradeTooLowException : public std::exception
+	{
+		virtual const char * what() const throw ();
+	};
 
 	~Bureaucrat();
 

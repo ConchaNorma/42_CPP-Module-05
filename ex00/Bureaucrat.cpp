@@ -6,7 +6,7 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 18:26:42 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/25 08:05:10 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/25 21:04:59 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,22 @@
 Bureaucrat::Bureaucrat() : _name("???")
 {
 	std::cout << "DEFAULF contraction called" << std::endl;
-	// this->name = "X";
 	this->_grade = MIN_GRADE;
 }
 Bureaucrat::Bureaucrat(const std::string name , int grade) : _name(name), _grade(grade)
 {
 	std::cout << "NAMED contraction called" << std::endl;
-	// this->_name = name;
-	// this->_grade = grade;
+	if (_grade > MIN_GRADE)
+		throw Bureaucrat::GradeTooLowException();
+	if (_grade < MAX_GRADE)
+		throw Bureaucrat::GradeTooHighException();
 }
 
 const Bureaucrat& Bureaucrat::operator=  (const Bureaucrat &other)
 {
 	std::cout << "BUREAUCRAT Copy assignment operator called" << std::endl;
-	if (this != &other){
-		// *this = other;
-		this->_name = other.getName();
+	if (this != &other)
 		this->_grade = other.getGrade();
-		// _name = other._name;
-		// _grade = other._grade;
-	}
 	return *this;
 }
 
@@ -76,10 +72,29 @@ Bureaucrat Bureaucrat::operator -- (int)
 	return temp;
 }
 
-	// std::string GradeTooHighException ();
-	// std::string GradeTooLowException ();
+void Bureaucrat::increaseGrade()
+{
+	if (_grade <= MAX_GRADE)
+		throw Bureaucrat::GradeTooHighException();
+	this->_grade--;
+}
 
+void Bureaucrat::decreaseGrade()
+{
+	if (_grade >= MIN_GRADE)
+		throw Bureaucrat::GradeTooLowException();
+	this->_grade++;
+}
 
+const char *Bureaucrat::GradeTooHighException::what() const throw ()
+{
+	return "Grade is too High";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw ()
+{
+	return "Grade is too Low";
+}
 
 Bureaucrat::~Bureaucrat()
 {
