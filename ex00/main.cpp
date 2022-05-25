@@ -6,7 +6,7 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 07:58:57 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/23 08:06:03 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/25 07:45:46 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 int main()
 {
 	Bureaucrat	b("Ivan", 2);
+
+	std::cout << b.getName() << " has grade " << b.getGrade() << std::endl;
+	std::cout << b++ << std::endl;
+	std::cout << b.getName() << " has grade " << b.getGrade() << std::endl;
+
+	// std::cout << b++ << std::endl;
 
 	try
 	{

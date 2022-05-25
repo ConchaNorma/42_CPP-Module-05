@@ -6,33 +6,35 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 18:26:42 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/23 08:09:21 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/25 08:05:10 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat() : _name("???")
 {
 	std::cout << "DEFAULF contraction called" << std::endl;
-	this->name = "";
-	this->grade = MIN_GRADE;
+	// this->name = "X";
+	this->_grade = MIN_GRADE;
 }
-Bureaucrat::Bureaucrat(std::string name, int grade)
+Bureaucrat::Bureaucrat(const std::string name , int grade) : _name(name), _grade(grade)
 {
 	std::cout << "NAMED contraction called" << std::endl;
-	this->name = name;
-	this->grade = grade;
+	// this->_name = name;
+	// this->_grade = grade;
 }
 
-Bureaucrat& Bureaucrat::operator = (const Bureaucrat &other)
+const Bureaucrat& Bureaucrat::operator=  (const Bureaucrat &other)
 {
 	std::cout << "BUREAUCRAT Copy assignment operator called" << std::endl;
-	if (this == &other)
-		return *this;
-	this->name = other.getName();
-	this->grade = other.getGrade();
-
+	if (this != &other){
+		// *this = other;
+		this->_name = other.getName();
+		this->_grade = other.getGrade();
+		// _name = other._name;
+		// _grade = other._grade;
+	}
 	return *this;
 }
 
@@ -42,12 +44,13 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other)
 	*this = other;
 }
 
-std::string const getName() const {return name;}
-int getGrade() {return grade;}
+std::string Bureaucrat::getName() const {return _name;}
+int Bureaucrat::getGrade() const {return _grade;}
 
-Bureaucrat& Bureaucrat::operator ++ ()
+Bureaucrat& Bureaucrat::operator++()
 {
-	this->grade--;
+	std::cout << "operator ++" << std::endl;
+	this->_grade--;
 	return *this;
 }
 
@@ -55,13 +58,13 @@ Bureaucrat Bureaucrat::operator ++ (int)
 {
 	Bureaucrat temp(*this);
 
-	this->grade--;
+	this->_grade--;
 	return temp;
 }
 
 Bureaucrat& Bureaucrat::operator -- ()
 {
-	this->grade++;
+	this->_grade++;
 	return *this;
 }
 
@@ -69,7 +72,7 @@ Bureaucrat Bureaucrat::operator -- (int)
 {
 	Bureaucrat temp(*this);
 
-	this->grade++;
+	this->_grade++;
 	return temp;
 }
 
@@ -85,6 +88,7 @@ Bureaucrat::~Bureaucrat()
 
 std::ostream& operator << (std::ostream &out, const Bureaucrat &a)
 {
+
 	out << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
 	return out;
 }
