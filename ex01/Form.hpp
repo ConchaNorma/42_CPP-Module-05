@@ -6,48 +6,44 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:36:59 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/25 22:13:50 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/27 08:04:02 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORM_H
 # define FORM_H
 
-# define GRADE_TO_SIGN 1
-# define GRADE_TO_EXECUTE 150
-
 # include <iostream>
 # include "Bureaucrat.hpp"
 
-class Form : public Bureaucrat
+class Bureaucrat;
+class Form
 {
 public:
 
 	Form();
-	Form(std::string name, int grade);
+	Form(std::string name, int gradeSing, int gradeExecute);
 
 	const Form& operator  =  (const Form &other);
 	Form(const Form &other);
-
-	Form& operator ++ ();
-	Form operator ++ (int);
-	Form& operator -- ();
-	Form operator -- (int);
 
 	std::string getFormName() const;
 	int getGradeSign() const;
 	int getGradeExecute() const;
 	bool isSigned() const;
 
-	void beSigned(const Bureaucrat &other) const;
-	void decreaseGrade();
+	void beSigned(const Bureaucrat &other);
 
 	class GradeTooHighException : public std::exception
 	{
 		virtual const char * what() const throw ();
 	};
-
 	class GradeTooLowException : public std::exception
+	{
+		virtual const char * what() const throw ();
+	};
+
+	class FormAlreadySigned : public std::exception
 	{
 		virtual const char * what() const throw ();
 	};

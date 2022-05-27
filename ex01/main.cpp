@@ -6,11 +6,12 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 07:58:57 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/25 22:14:44 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/27 07:57:01 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+# include "Form.hpp"
 
 int main()
 {
@@ -52,18 +53,18 @@ int main()
 	Bureaucrat *crats[] =
 	{
 		new Bureaucrat("crat11", 150), new Bureaucrat("crat12", 128),
-		new Bureaucrat("crat11", 98), new Bureaucrat("crat12", 50),
-		new Bureaucrat("crat11", 30), new Bureaucrat("crat12", 2),
+		new Bureaucrat("crat13", 98), new Bureaucrat("crat14", 50),
+		new Bureaucrat("crat15", 30), new Bureaucrat("crat16", 2),
 	};
 
 	for (int i = 0; i < 6; i++)
 	{
-		std::cout	<< "--- Form '" << forms[i]->getName()
-					<< "', signing status = '" << forms[i]->getSign()
+		std::cout	<< "--- Form '" << forms[i]->getFormName()
+					<< "', signing status = '" << forms[i]->isSigned()
 					<< "' --->" << std::endl;
 		for (int j = 0; j < 6; j++)
 			crats[j]->signForm(*forms[i]);
-		std::cout	<< "---> Signing status of Form = '" << forms[i]->getSign()
+		std::cout	<< "---> Signing status of Form = '" << forms[i]->isSigned()
 					<< "'\n" << std::endl;
 	}
 

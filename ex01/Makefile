@@ -6,13 +6,13 @@
 #    By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/23 07:57:16 by cnorma            #+#    #+#              #
-#    Updated: 2022/05/23 07:58:45 by cnorma           ###   ########.fr        #
+#    Updated: 2022/05/25 23:07:43 by cnorma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	bureaucrat
 
-SRC			=	main.cpp	Bureaucrat.cpp
+SRC			=	main.cpp	Bureaucrat.cpp	Form.cpp
 
 SRC_RIR 	=	./
 
@@ -20,7 +20,7 @@ OBJ_DIR		=	./obj/
 
 OBJ			=	$(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(SRC:.cpp=.o))
 
-HEADER		=	./Bureaucrat.hpp
+HEADER		=	./Bureaucrat.hpp	./Form.hpp
 
 CC			=	c++
 

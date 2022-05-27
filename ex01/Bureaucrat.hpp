@@ -6,7 +6,7 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 17:07:03 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/25 22:14:02 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/27 08:03:18 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # include <iostream>
 
+class Form;
 class Bureaucrat
 {
 public:
@@ -49,9 +50,11 @@ public:
 		virtual const char * what() const throw ();
 	};
 
+	void signForm(Form &form);
+
 	~Bureaucrat();
 
-protected:
+private:
 	const std::string _name;
 	int	_grade;
 };

@@ -6,7 +6,7 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:36:52 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/25 22:13:47 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/27 00:16:30 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ Form::Form() : f_name("???"), f_signed(false), f_gradeSign(1), f_gradeExecute(1)
 {
 	std::cout << "FORM DEFAULF contraction called" << std::endl;
 }
-Form::Form(const std::string name , int gradeSing, int gradeExecute) \
+Form::Form(std::string name , int gradeSing, int gradeExecute) \
 	: f_name(name), f_signed(false), f_gradeSign(gradeSing), f_gradeExecute(gradeExecute)
 {
 	std::cout << "FORM NAMED contraction called" << std::endl;
-	if (f_gradeSign > MIN_GRADE)
+	if (f_gradeSign > MIN_GRADE || f_gradeExecute > MIN_GRADE)
 		throw Form::GradeTooLowException();
-	if (f_grade < MAX_GRADE)
+	if (f_gradeSign < MAX_GRADE || f_gradeExecute < MAX_GRADE)
 		throw Form::GradeTooHighException();
 }
 
@@ -30,62 +30,30 @@ const Form& Form::operator=  (const Form &other)
 {
 	std::cout << "FORM Copy assignment operator called" << std::endl;
 	if (this != &other)
-		this->f_signed = other.getSigned();
+		this->f_signed = other.isSigned();
 	return *this;
 }
 
-Form::Form(const Form &other)
+Form::Form(const Form &other) : f_name(other.f_name),
+								f_signed(other.f_signed),
+								f_gradeSign(other.f_gradeSign),
+								f_gradeExecute(other.f_gradeExecute)
 {
 	std::cout << "FORM Copy constructor called" << std::endl;
-	*this = other;
 }
 
 std::string Form::getFormName() const {return f_name;}
 int Form::getGradeSign() const {return f_gradeSign;}
 int Form::getGradeExecute() const {return f_gradeExecute;}
-int Form::isSigned() const {return f_signed;}
+bool Form::isSigned() const {return f_signed;}
 
-Form& Form::operator++()
+void Form::beSigned(const Bureaucrat &other)
 {
-	std::cout << "operator ++" << std::endl;
-	this->_grade--;
-	return *this;
-}
-
-Form Form::operator ++ (int)
-{
-	Form temp(*this);
-
-	this->_grade--;
-	return temp;
-}
-
-Form& Form::operator -- ()
-{
-	this->_grade++;
-	return *this;
-}
-
-Form Form::operator -- (int)
-{
-	Form temp(*this);
-
-	this->_grade++;
-	return temp;
-}
-
-void Form::beSigned(const Bureaucrat &other) const
-{
-	if (other.getGrade() > this->f_gradeSign)
+	if (this->f_signed == true)
+		throw Form::FormAlreadySigned();
+	if (other.getGrade() > this->f_gradeSign || other.getGrade() > this->f_gradeExecute)
 		throw Form::GradeTooLowException();
 	this->f_signed = true;
-}
-
-void Form::decreaseGrade()
-{
-	if (_grade >= MIN_GRADE)
-		throw Form::GradeTooLowException();
-	this->_grade++;
 }
 
 const char *Form::GradeTooHighException::what() const throw ()
@@ -96,6 +64,11 @@ const char *Form::GradeTooHighException::what() const throw ()
 const char *Form::GradeTooLowException::what() const throw ()
 {
 	return "Form Grade is too Low";
+}
+
+const char *Form::FormAlreadySigned::what() const throw ()
+{
+	return "Form is Already Signed";
 }
 
 Form::~Form()
