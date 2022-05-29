@@ -6,7 +6,7 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:36:59 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/27 08:04:02 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/27 22:24:30 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ public:
 	bool isSigned() const;
 
 	void beSigned(const Bureaucrat &other);
+	virtual void execute(Bureaucrat const & executor) const = 0;
 
 	class GradeTooHighException : public std::exception
 	{
@@ -48,7 +49,7 @@ public:
 		virtual const char * what() const throw ();
 	};
 
-	~Form();
+	virtual ~Form();
 
 private:
 	const std::string	f_name;

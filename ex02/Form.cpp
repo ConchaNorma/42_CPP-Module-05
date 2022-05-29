@@ -6,18 +6,25 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:36:52 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/27 00:16:30 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/27 22:23:11 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Form.hpp"
 
-Form::Form() : f_name("???"), f_signed(false), f_gradeSign(1), f_gradeExecute(1)
+Form::Form()
+		:	f_name("DefualfForm"),
+			f_signed(false),
+			f_gradeSign(MIN_GRADE),
+			f_gradeExecute(MIN_GRADE)
 {
 	std::cout << "FORM DEFAULF contraction called" << std::endl;
 }
-Form::Form(std::string name , int gradeSing, int gradeExecute) \
-	: f_name(name), f_signed(false), f_gradeSign(gradeSing), f_gradeExecute(gradeExecute)
+Form::Form(std::string name , int gradeSing, int gradeExecute)
+	:	f_name(name),
+		f_signed(false),
+		f_gradeSign(gradeSing),
+		f_gradeExecute(gradeExecute)
 {
 	std::cout << "FORM NAMED contraction called" << std::endl;
 	if (f_gradeSign > MIN_GRADE || f_gradeExecute > MIN_GRADE)
@@ -79,7 +86,11 @@ Form::~Form()
 std::ostream& operator << (std::ostream &out, const Form &a)
 {
 
-	out << "FORM name " <<a.getFormName() << "; sign status = " << a.isSigned() \
-		<< "; Grade to Sign is " << a.getGradeSign() << "; Grade to Execute is " << a.getGradeExecute() << std::endl;
+	out << "FORM name " <<a.getFormName()
+		<< "; sign status = " << a.isSigned()
+		<< "; Grade to Sign is " << a.getGradeSign()
+		<< "; Grade to Execute is " << a.getGradeExecute()
+		<< std::endl;
+
 	return out;
 }
