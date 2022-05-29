@@ -6,7 +6,7 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:36:59 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/29 21:39:37 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/29 18:22:07 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ public:
 	virtual void execute(const Bureaucrat &executor) const = 0;
 
 	void beSigned(const Bureaucrat &other);
-	virtual void execute(Bureaucrat const & executor) const = 0;
 
 	class GradeTooHighException : public std::exception
 	{
