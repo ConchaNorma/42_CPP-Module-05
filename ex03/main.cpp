@@ -6,7 +6,7 @@
 /*   By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 07:58:57 by cnorma            #+#    #+#             */
-/*   Updated: 2022/05/29 20:12:27 by cnorma           ###   ########.fr       */
+/*   Updated: 2022/05/29 22:12:15 by cnorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,23 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
-
-static void changeGrade(Bureaucrat &obj, int newGrade)
-{
-	if (newGrade < MAX_GRADE || newGrade > MIN_GRADE)
-		return ;
-	while (obj.getGrade() > newGrade) { obj.increaseGrade(); }
-	std::cout	<< "--> Bureaucrat grade has been increased to "
-				<< newGrade << "." << std::endl;
-}
+#include "Intern.hpp"
 
 int main()
 {
-	Bureaucrat a("Elik", 150);
-	Form *forms[] = {
-		new ShrubberyCreationForm("Target1"),
-		new RobotomyRequestForm("Target2"),
-		new PresidentialPardonForm("Target3")
-	};
+	Intern randomIntern;
+	Form *resForm;
 
-	for (int i = 0; i < 3; i++)
-	{
-		a.executeForm(*forms[i]);
-		a.signForm(*forms[i]);
-		changeGrade(a, forms[i]->getGradeSign());
-		a.signForm(*forms[i]);
-		a.signForm(*forms[i]);
-		a.executeForm(*forms[i]);
-		changeGrade(a, forms[i]->getGradeExecute());
-		a.executeForm(*forms[i]);
-	}
+	resForm = randomIntern.makeForm("shrubbery creation", "target1");
+	std::cout << *resForm << std::endl;
+	delete resForm;
+	resForm = randomIntern.makeForm("robotomy request", "target2");
+	std::cout << *resForm << std::endl;
+	delete resForm;
+	resForm = randomIntern.makeForm("presidential pardon", "target3");
+	std::cout << *resForm << std::endl;
+	delete resForm;
+	resForm = randomIntern.makeForm("error", "target4");
 
-	std::cout << a << std::endl;
-
-	for (int i = 0; i < 3; i++)
-		delete forms[i];
 	return 0;
 }

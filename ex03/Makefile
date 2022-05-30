@@ -6,14 +6,14 @@
 #    By: cnorma <cnorma@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/23 07:57:16 by cnorma            #+#    #+#              #
-#    Updated: 2022/05/29 18:20:06 by cnorma           ###   ########.fr        #
+#    Updated: 2022/05/29 22:13:42 by cnorma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	bureaucrat
 
 SRC			=	main.cpp	Bureaucrat.cpp	Form.cpp	PresidentialPardonForm.cpp \
-				RobotomyRequestForm.cpp	ShrubberyCreationForm.cpp
+				RobotomyRequestForm.cpp	ShrubberyCreationForm.cpp	Intern.cpp
 
 SRC_RIR 	=	./
 
@@ -22,7 +22,7 @@ OBJ_DIR		=	./obj/
 OBJ			=	$(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(SRC:.cpp=.o))
 
 HEADER		=	./Bureaucrat.hpp	./Form.hpp	./PresidentialPardonForm.cpp \
-				./RobotomyRequestForm.hpp	./ShrubberyCreationForm.hpp
+				./RobotomyRequestForm.hpp	./ShrubberyCreationForm.hpp	./Intern.hpp
 
 CC			=	c++
 
